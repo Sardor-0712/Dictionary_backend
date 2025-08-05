@@ -10,7 +10,15 @@ require("./utils/cron-job.js");
 void ConnectDB();
 
 app.use(express.json());
-app.use(cors({ origin: "http://localhost:5173" }));
+
+app.use(cors({
+  origin: [
+    "http://localhost:5173", // dev uchun
+    "https://dictionary-rpmy.onrender.com" // prod frontend uchun
+  ],
+  credentials: true
+}));
+
 app.use(express.urlencoded({ extended: true }))
 
 app.get("/", (req, res) => {
